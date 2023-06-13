@@ -1,14 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ali Azaz M</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>Ali Azaz M ( Senior Full Stack Developer. )</title>
+  </head>
+  <body class="w-100 h-100">
+    <div>
+      <div class="flex p-5 mt-5">
+        <div class="logo flex-30"><a href="/">Ali Azaz</a></div>
+        <nav class="navbar flex-70 px-6">
+          <a class="navItem home">Home</a>
+          <a class="navItem about">About</a>
+          <a class="navItem portfolio">Portfolio</a>
+          <a class="navItem contact">Contact</a>
+        </nav>
+      </div>
 
-    <h1>Hi, I'm Ali Azaz M.</h1>
-    
-</body>
+      <section class="contentdiv" id="home">
+        <div>
+          <div class="card">
+            <div class="pl-5">
+              <span class="card-title"> Hi I Am Ali Azaz Maqsood.</span>
+              <p>
+                I am Senior Full Stack Developer having 9+ years of experience
+                with various technologies like below:
+                <br />
+              </p>
+
+              <div id="technologies"></div>
+            </div>
+            <div class="card-footer">Created by Ali Azaz Maqsood.</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="contentdiv hiddendiv" id="about">
+        <div>
+          <div class="card">
+            <p class="pl-5">About</p>
+
+            <p class="card-footer">Created by Ali Azaz Maqsood.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="contentdiv hiddendiv" id="portfolio">
+        <div>
+          <div class="card">
+            <p class="pl-5">PortFolio</p>
+
+            <p class="card-footer">Created by Ali Azaz Maqsood.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="contentdiv hiddendiv" id="contact">
+        <div>
+          <div class="card">
+            <p class="pl-5">Contact</p>
+
+            <p class="card-footer">Created by Ali Azaz Maqsood.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>
+
+  <script>
+    document.addEventListener("click", function (event) {
+      const navbar = document.querySelectorAll(".navItem");
+      let navList = [];
+      const active = localStorage.getItem("active-menu");
+      navbar.forEach((n) => {
+        navList.push(n.classList[1]);
+        n.classList.remove("active");
+      });
+      let clickedEvent = event.target.classList;
+      if (clickedEvent.length > 0) {
+        clickedEvent = clickedEvent[1];
+      }
+
+      if (navList.includes(clickedEvent)) {
+        let section = document.querySelectorAll(".contentdiv");
+        section.forEach((s) => {
+          s.classList.add("hiddendiv");
+        });
+        document.getElementById(clickedEvent).classList.remove("hiddendiv");
+        event.target.classList.add("active");
+        localStorage.setItem("active-menu", clickedEvent);
+      } else {
+        let activeMenu = document
+          .getElementsByClassName(active)[0]
+          .classList.add("active");
+
+        document.getElementById(active).classList.remove("hiddendiv");
+      }
+    });
+
+    function technologiesList() {
+      const techList = [
+        "Node Js",
+        "Express Js",
+        "Nest Js",
+        "Python",
+        "React Js",
+        "Next Js",
+        "React Native",
+        "Flutter",
+        "Vue Js",
+        "Java",
+        "Spring",
+        "Hibernate",
+        "Kafka",
+        "TypeORM",
+        "RabbitMQ",
+        "MongoDB",
+        "SQL",
+        "MySQL",
+        "Docker",
+        "Kubernates",
+        "AWS",
+        "VPS",
+        "Jenkins",
+        "Git",
+        ".NET",
+        "C#",
+      ];
+      let html = "<ul>";
+      let n = 0;
+
+      techList.forEach((t) => {
+        if (n % 10 == 0) {
+          html = html + "</ul><ul>";
+        }
+        html = html + `<li>${t.toLowerCase()}</li>`;
+        n++;
+      });
+
+      document.getElementById("technologies").innerHTML = html + "</ul>";
+    }
+    technologiesList();
+  </script>
 </html>
